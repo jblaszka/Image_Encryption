@@ -4,7 +4,7 @@ GUIMyFrame1::GUIMyFrame1( wxWindow* parent )
 :
 MyFrame1( parent )
 {
-
+	//pozdrawiam mame i tate
 }
 
 void GUIMyFrame1::m_button_save_click( wxCommandEvent& event )
