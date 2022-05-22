@@ -21,7 +21,8 @@ public:
     void m_button_load_message_click(wxCommandEvent& event);
     void m_button_save_click(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event) { Destroy(); }
-    void setGreen();
+    void setIndicatorMessage();
+    void setIndicatorImage();
 
     wxImage getImage();
     wxImage getMessage();

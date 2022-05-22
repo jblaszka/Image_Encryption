@@ -20,15 +20,13 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 void GUIMyFrame1::m_button_decode_click( wxCommandEvent& event )
 {
 	imageMain = dialog_modalny->getImage();
-	imageMain.SaveFile("test.jpg");
+	Repaint();
+	imageMain.SaveFile("test.png");
 }
 
 
 void GUIMyFrame1::Repaint()
 {
-	imageMain = dialog_modalny->getImage();
-	imageMessage = dialog_modalny->getMessage();
-
 	wxBitmap bitmap(imageMain);    
 	wxClientDC dc(m_scrolledWindow);  
 	m_scrolledWindow->DoPrepareDC(dc);
