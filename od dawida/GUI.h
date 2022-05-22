@@ -21,7 +21,7 @@
 #include <wx/sizer.h>
 #include <wx/scrolwin.h>
 #include <wx/frame.h>
-#include "ModalDialogue.h"
+#include "ModalnyDlg.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -35,11 +35,15 @@ private:
 
 
 protected:
-	wxButton* m_button_code;
-	wxButton* m_button_decode;
+	wxButton* m_button_load;
+	wxButton* m_button_method_A;
+	wxButton* m_button_methond_B;
 
-	virtual void m_button_code_click(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_button_decode_click(wxCommandEvent& event) { event.Skip(); }
+
+
+	// Virtual event handlers, override them in your derived class
+	virtual void m_button_save_click(wxCommandEvent& event) { event.Skip(); }
+	virtual void m_button_method_A_click(wxCommandEvent& event) { event.Skip(); }
 	
 
 public:
@@ -49,6 +53,7 @@ public:
 	~MyFrame1();
 	wxImage* imagePanel;
 	wxScrolledWindow* m_scrolledWindow;
+	void test();
 
 };
 
