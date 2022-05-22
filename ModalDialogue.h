@@ -24,7 +24,9 @@ public:
     void setGreen();
 
     wxImage getImage();
-    wxImage Img_Org, Img_Cpy;
+    wxImage getMessage();
+
+    wxImage Img_message, Img_Org;
     wxBitmap MyBitmap;
 
 };

@@ -13,6 +13,7 @@ class GUIMyFrame1 : public MyFrame1
 		GUIMyFrame1( wxWindow* parent );
 		void Repaint();
 		wxImage imageMain;
+		wxImage imageMessage;
 };
 
 #endif 

@@ -46,7 +46,7 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 
 	bSizer4->Add(m_panel_message, 0, wxALL, 5);
 	m_panel_message->SetBackgroundColour(wxColor(43, 243, 77));
-
+	m_panel_image->SetBackgroundColour(wxColor(43, 243, 77));
 
 	bSizer2->Add(bSizer4, 1, wxEXPAND | wxLEFT, 5);
 
@@ -75,15 +75,6 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 
 void ModalDialogue::m_button_load_image_click(wxCommandEvent& event)
 {
-
-}
-
-void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
-{
-	setGreen();
-	//m_panel_message->SetBackgroundColour
-	m_panel_image->SetOwnBackgroundColour(wxColor(43, 243, 77));
-
 	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("JPEG files (*.jpg)|*.jpg"), wxFD_OPEN));
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
 	{
@@ -92,7 +83,21 @@ void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 		else
 		{
 			wxImage TempImg(Img_Org);
-			Img_Cpy = Img_Org.Copy();
+		}
+		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
+	}
+}
+
+void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
+{
+	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("JPEG files (*.jpg)|*.jpg"), wxFD_OPEN));
+	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
+	{
+		if (!Img_message.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_JPEG))
+			wxLogError(_("Nie mo¿na za³adowaæ obrazka"));
+		else
+		{
+			wxImage TempImg(Img_message);
 		}
 		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
 	}
@@ -109,5 +114,9 @@ void ModalDialogue::setGreen() {
 }
 
 wxImage ModalDialogue::getImage() {
-	return Img_Cpy;
+	return Img_Org;
+}
+
+wxImage ModalDialogue::getMessage() {
+	return Img_message;
 }
