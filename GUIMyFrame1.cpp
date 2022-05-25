@@ -5,8 +5,6 @@ GUIMyFrame1::GUIMyFrame1( wxWindow* parent )
 :
 MyFrame1(parent)
 {
-	imageMain = wxImage(800, 533);
-	imageMessage = wxImage(800, 533);
 }
 
 
@@ -14,6 +12,8 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 {
 	dialog_modalny = new ModalDialogue(this);
 	dialog_modalny->ShowModal();
+	method_A = new MethodA(dialog_modalny->getImage(), dialog_modalny->getMessage());
+	method_A->codeWithMethodA().SaveFile("Zakodowany_Obraz.png");
 }
 
 

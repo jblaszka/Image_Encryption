@@ -1,6 +1,7 @@
 #ifndef __GUIMyFrame1__
 #define __GUIMyFrame1__
 #include "GUI.h"
+#include "MethodA.h"
 
 class GUIMyFrame1 : public MyFrame1
 {
@@ -10,6 +11,7 @@ class GUIMyFrame1 : public MyFrame1
 
 	public:
 		ModalDialogue* dialog_modalny;
+		MethodA* method_A;
 		GUIMyFrame1( wxWindow* parent );
 		void Repaint();
 		wxImage imageMain;

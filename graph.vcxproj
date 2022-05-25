@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIMyFrame1.h" />
+    <ClInclude Include="MethodA.h" />
     <ClInclude Include="ModalDialogue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GUIMyFrame1.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MethodA.cpp" />
     <ClCompile Include="ModalDialogue.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

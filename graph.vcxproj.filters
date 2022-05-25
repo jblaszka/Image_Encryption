@@ -24,6 +24,9 @@
     <ClInclude Include="ModalDialogue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MethodA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GUI.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModalDialogue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MethodA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
