@@ -29,6 +29,7 @@ public:
 
     wxImage Img_message, Img_Org;
     wxBitmap MyBitmap;
+    bool checking = false;
 
 };
 
