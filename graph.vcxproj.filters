@@ -27,6 +27,9 @@
     <ClInclude Include="MethodA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MethodB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GUI.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MethodA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MethodB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

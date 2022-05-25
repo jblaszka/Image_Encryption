@@ -105,6 +105,7 @@ void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 }
 
 void ModalDialogue::m_button_save_click(wxCommandEvent& event) {
+	checking = true;
 	EndModal(wxID_OK);
 }
 

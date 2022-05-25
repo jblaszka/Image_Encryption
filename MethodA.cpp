@@ -5,19 +5,19 @@ MethodA::MethodA()
 {
 }
 
-wxImage MethodA::codeWithMethodA(wxImage img1, wxImage img2)
+void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 {
-	wxImage pattern = img1;
+	wxImage Img_reference = img1;
 	wxImage messageToCode = img2;
 	unsigned char* Template;
 	unsigned char* Cipher;
 	unsigned char* Coded;
-	wxImage Img_Coded = pattern;
-	Template = pattern.GetData();
+	wxImage Img_encrypted = Img_reference;
+	Template = Img_reference.GetData();
 	Cipher = messageToCode.GetData();
-	Coded = Img_Coded.GetData();
+	Coded = Img_encrypted.GetData();
 
-	for (int i = 0; i < pattern.GetHeight() * pattern.GetWidth() * 3; i = i + 3) {
+	for (int i = 0; i < Img_reference.GetHeight() * Img_reference.GetWidth() * 3; i = i + 3) {
 		if (Cipher[i] < 32) {
 			Coded[i] -= 1;
 			Coded[i + 1] -= 1;
@@ -45,17 +45,21 @@ wxImage MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 			Coded[i + 2] -= 1;
 		}
 	}
-	return Img_Coded;
+	Img_encrypted.SaveFile("TESTOWO.png");
+
 }
 
-wxImage MethodA::decode(wxImage img1, wxImage img2) {
+void MethodA::decode(wxImage img1, wxImage img2) {
 
 	wxImage Img_Template = img1;
-	wxImage Img_Coded = img2;
+	wxImage Img_encrypted = img2;
+
 	wxImage Img_Cipher(Img_Template.GetWidth(), Img_Template.GetHeight());
+
 	unsigned char* Template;
 	unsigned char* Cipher;
 	unsigned char* Coded;
+
 	Cipher = Img_Cipher.GetData();
 
 	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i++) {
@@ -63,7 +67,7 @@ wxImage MethodA::decode(wxImage img1, wxImage img2) {
 	}
 	Template = Img_Template.GetData();
 
-	Coded = Img_Coded.GetData();
+	Coded = Img_encrypted.GetData();
 	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i = i + 3) {
 		if (Template[i + 2] - Coded[i + 2] == 1 && Template[i + 1] - Coded[i + 1] == 1 && Template[i] - Coded[i] == 1) {
 			Cipher[i] = 0;
@@ -101,5 +105,7 @@ wxImage MethodA::decode(wxImage img1, wxImage img2) {
 			Cipher[i + 2] = 192;
 		}
 	}
-	return Img_Cipher;
+	Img_Cipher.SaveFile("TESTOWO2.png");
 }
+
+

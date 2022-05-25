@@ -12,16 +12,24 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 {
 	dialog_modalny = new ModalDialogue(this);
 	dialog_modalny->ShowModal();
-	method_A = new MethodA(dialog_modalny->getImage(), dialog_modalny->getMessage());
-	method_A->codeWithMethodA().SaveFile("Zakodowany_Obraz.png");
+	MethodA method_A;
+
+	//method_A.codeWithMethodA(dialog_modalny->getImage(), dialog_modalny->getMessage());
+	if (dialog_modalny->checking == true) {
+		method_A.codeWithMethodA(dialog_modalny->getImage(), dialog_modalny->getMessage());
+	}
+	else {
+		wxLogError(_("Nie mo¿na za³adowaæ obrazka"));
+	}
 }
 
 
 void GUIMyFrame1::m_button_decode_click( wxCommandEvent& event )
 {
-	imageMain = dialog_modalny->getImage();
-	Repaint();
-	imageMain.SaveFile("test.png");
+	dialog_modalny2 = new ModalDialogue(this);
+	dialog_modalny2->ShowModal();
+	MethodA method_2;
+	method_2.decode(dialog_modalny2->getImage(), dialog_modalny2->getMessage());
 }
 
 

@@ -11,11 +11,14 @@ class GUIMyFrame1 : public MyFrame1
 
 	public:
 		ModalDialogue* dialog_modalny;
-		MethodA* method_A;
+		ModalDialogue* dialog_modalny2;
 		GUIMyFrame1( wxWindow* parent );
 		void Repaint();
 		wxImage imageMain;
 		wxImage imageMessage;
+
+
+
 };
 
 #endif 

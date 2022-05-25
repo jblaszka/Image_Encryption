@@ -7,13 +7,12 @@ class MethodA
 {
 public :
 	MethodA();
-	wxImage codeWithMethodA(wxImage img1, wxImage img2);
-	wxImage pattern;
-	wxImage messageToCode;
-	wxImage decode(wxImage img1, wxImage img2);
+	void codeWithMethodA(wxImage img1, wxImage img2);
+	void decode(wxImage img1, wxImage img2);
 
 private:
-
+	wxImage pattern;
+	wxImage messageToCode;
 
 };
 #endif
