@@ -11,10 +11,12 @@ wxVector <wxImage> MethodB::codeWithMethodB(wxImage img1)
 	wxImage Img_A(1600, 1066);
 	wxImage Img_B(1600, 1066);
 	wxImage Img_C(1600, 1066);
+
 	unsigned char* Coded;
 	unsigned char* Image_a;
 	unsigned char* Image_b;
 	unsigned char* Image_c;
+
 	Image_b = Img_B.GetData();
 	Image_a = Img_A.GetData();
 	Image_c = Img_C.GetData();
@@ -76,24 +78,30 @@ wxVector <wxImage> MethodB::codeWithMethodB(wxImage img1)
 	vector_img.push_back(Img_A);
 	vector_img.push_back(Img_B);
 	return vector_img;
+
 }
 
 wxImage MethodB::decode(wxImage img1, wxImage img2) {
 
 	srand(time(NULL));
-	wxImage Img_A(1600, 1066);
-	wxImage Img_B(1600, 1066);
+
+	wxImage Img_A = img1;
+	wxImage Img_B = img2;
+
 	wxImage Img_C(1600, 1066);
+
 	unsigned char* Coded;
 	unsigned char* Image_a;
 	unsigned char* Image_b;
 	unsigned char* Image_c;
+
 	Image_b = Img_B.GetData();
 	Image_a = Img_A.GetData();
 	Image_c = Img_C.GetData();
 
-	Img_A = img1;
-	Img_B = img2;
+	for (int i = 0; i < Img_C.GetHeight() * Img_C.GetWidth() * 3; i++) {
+		Image_c[i] = 255;
+	}
 
 	for (int j = 0; j < Img_C.GetHeight() * Img_C.GetWidth() * 3; j += 3)
 	{
@@ -104,6 +112,7 @@ wxImage MethodB::decode(wxImage img1, wxImage img2) {
 			Image_c[j + 2] = 0;
 		}
 	}
+	Img_C.Rescale(800, 533);
 	return Img_C;
 
 }

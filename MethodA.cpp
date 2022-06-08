@@ -7,17 +7,19 @@ MethodA::MethodA()
 
 void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 {
-	wxImage Img_reference = img1;
-	wxImage messageToCode = img2;
+	wxImage Img_Reference = img1;
+	wxImage Img_MessageToCode = img2;
+	wxImage Img_encrypted = Img_Reference;
+
 	unsigned char* Template;
 	unsigned char* Cipher;
 	unsigned char* Coded;
-	wxImage Img_encrypted = Img_reference;
-	Template = Img_reference.GetData();
-	Cipher = messageToCode.GetData();
+
+	Template = Img_Reference.GetData();
+	Cipher = Img_MessageToCode.GetData();
 	Coded = Img_encrypted.GetData();
 
-	for (int i = 0; i < Img_reference.GetHeight() * Img_reference.GetWidth() * 3; i = i + 3) {
+	for (int i = 0; i < Img_Reference.GetHeight() * Img_Reference.GetWidth() * 3; i = i + 3) {
 		if (Cipher[i] < 32) {
 			Coded[i] -= 1;
 			Coded[i + 1] -= 1;
@@ -51,24 +53,24 @@ void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 
 void MethodA::decode(wxImage img1, wxImage img2) {
 
-	wxImage Img_Template = img1;
-	wxImage Img_encrypted = img2;
+	wxImage Img_Reference = img1;
+	wxImage Img_Encrypted = img2;
 
-	wxImage Img_Cipher(Img_Template.GetWidth(), Img_Template.GetHeight());
+	wxImage Img_Message(Img_Reference.GetWidth(), Img_Reference.GetHeight());
 
 	unsigned char* Template;
 	unsigned char* Cipher;
 	unsigned char* Coded;
 
-	Cipher = Img_Cipher.GetData();
+	Cipher = Img_Message.GetData();
 
-	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i++) {
+	for (int i = 0; i < Img_Reference.GetHeight() * Img_Reference.GetWidth() * 3; i++) {
 		Cipher[i] = 255;
 	}
-	Template = Img_Template.GetData();
+	Template = Img_Reference.GetData();
 
-	Coded = Img_encrypted.GetData();
-	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i = i + 3) {
+	Coded = Img_Encrypted.GetData();
+	for (int i = 0; i < Img_Reference.GetHeight() * Img_Reference.GetWidth() * 3; i = i + 3) {
 		if (Template[i + 2] - Coded[i + 2] == 1 && Template[i + 1] - Coded[i + 1] == 1 && Template[i] - Coded[i] == 1) {
 			Cipher[i] = 0;
 			Cipher[i + 1] = 0;
@@ -105,7 +107,7 @@ void MethodA::decode(wxImage img1, wxImage img2) {
 			Cipher[i + 2] = 192;
 		}
 	}
-	Img_Cipher.SaveFile("TESTOWO2.png");
+	Img_Message.SaveFile("TESTOWO2.png");
 }
 
 

@@ -36,14 +36,16 @@ private:
 
 protected:
 	wxButton* m_button_code;
-	wxButton* m_button_decode;
+	wxButton* m_button_decode_A;
+	wxButton* m_button_decode_B;
 
 
 
 
 	// Virtual event handlers, override them in your derived class
 	virtual void m_button_code_click(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_button_decode_click(wxCommandEvent& event) { event.Skip(); }
+	virtual void m_button_decode_A_click(wxCommandEvent& event) { event.Skip(); }
+	virtual void m_button_decode_B_click(wxCommandEvent& event) { event.Skip(); }
 	
 
 public:
