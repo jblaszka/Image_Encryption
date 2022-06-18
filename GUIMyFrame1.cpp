@@ -1,13 +1,11 @@
 #include "GUIMyFrame1.h"
+#include "GUIMyFrame1.h"
 #include <wx/wxprec.h>
 
 GUIMyFrame1::GUIMyFrame1(wxWindow* parent)
 	:
 	MyFrame1(parent)
 {
-	Img_Coded = wxImage(800, 533);
-	Img_Template = wxImage(800, 533);
-	Img_Cipher = wxImage(800, 533);
 }
 
 
@@ -15,122 +13,100 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 {
 	dialog_modalny = new ModalDialogue(this);
 	dialog_modalny->ShowModal();
-	CodeMethod_A();
+	MethodA method_A;
+	MethodB method_B;
+
+	if (dialog_modalny->checking == true) {
+
+		Img_Reference = dialog_modalny->getImage();
+		Img_Message = dialog_modalny->getMessage();
+
+		Repaint(Img_Reference);
+
+		method_A.save_MethodA_encrypted(Img_Reference, Img_Message);
+		method_B.save_methodB_encrypted(Img_Message);
+		//A+B
+		Img_Reference.Rescale(2 * Img_Message.GetWidth(), 2 * Img_Message.GetHeight());
+		method_A.codeWithMethodA(Img_Reference
+								, method_B.codeWithMethodB(Img_Message)[0]).SaveFile("A1_and_B_1.png");
+		method_A.codeWithMethodA(Img_Reference
+								, method_B.codeWithMethodB(Img_Message)[1]).SaveFile("A1_and_B_2.png");
+		Img_Reference.SaveFile("Reference_to_mixed_A_and_B.png");
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
+
 }
 
 
-void GUIMyFrame1::m_button_decode_click(wxCommandEvent& event)
+void GUIMyFrame1::m_button_decode_A_click(wxCommandEvent& event)
 {
-	dialog_modalny = new ModalDialogue(this);
-	dialog_modalny->ShowModal();
-	DecodeMethod_A();	
+	dialog_modalny2 = new ModalDialogue(this);
+	dialog_modalny2->ShowModal();
+	MethodA method_2;
+	MethodB method_B2;
+
+	if (dialog_modalny2->checking == true) {
+		Img_Reference = dialog_modalny2->getImage();
+		Img_Message = dialog_modalny2->getMessage();
+		Repaint(method_2.decodeMethodA(Img_Reference, Img_Message));
+		method_2.save_MethodA_decrypted(Img_Reference, Img_Message);
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
+}
+
+void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
+{
+	dialog_modalny3 = new ModalDialogue(this);
+	dialog_modalny3->setFirstButtonText("Load code 1!");
+	dialog_modalny3->setSecondButtonText("Load code 2");
+	dialog_modalny3->ShowModal();
+	MethodB method_B2;
+
+	if (dialog_modalny3->checking == true) {
+		Img_Reference = dialog_modalny3->getImage();
+		Img_Message = dialog_modalny3->getMessage();
+		Repaint(method_B2.decode(Img_Reference, Img_Message));
+		method_B2.save_methodB_decrypted(Img_Reference, Img_Message);
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
+}
+
+void GUIMyFrame1::m_button_decode_A_and_B_click(wxCommandEvent& event)
+{
+	dialog_modalny4 = new ModalDialogue(this);
+	dialog_modalny4->setFirstButtonText("Load image");
+	dialog_modalny4->setSecondButtonText("Load code 1");
+	dialog_modalny4->add_new_button();
+	dialog_modalny4->ShowModal();
+	MethodB method_B2;
+	MethodA method_A2;
+
+	if (dialog_modalny4->checking == true) {
+		Img_Reference = dialog_modalny4->getImage();
+		Img_Message = dialog_modalny4->getMessage();
+		Img_Code = dialog_modalny4->getCode();
+		method_B2.decode(method_A2.decodeMethodA(Img_Message, Img_Reference),
+					method_A2.decodeMethodA(Img_Message, Img_Code)).SaveFile("A_and_B_decoded.png");
+		Repaint(method_B2.decode(method_A2.decodeMethodA(Img_Message, Img_Reference),
+			method_A2.decodeMethodA(Img_Message, Img_Code)));
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
 }
 
 
-void GUIMyFrame1::Repaint()
+void GUIMyFrame1::Repaint(wxImage image)
 {
-
-	wxBitmap bitmap(Img_Cipher);
+	image.Rescale(800, 533);
+	wxBitmap bitmap(image);
 	wxClientDC dc(m_scrolledWindow);
 	m_scrolledWindow->DoPrepareDC(dc);
 	dc.DrawBitmap(bitmap, 0, 0, true);
 }
-
-void GUIMyFrame1::CodeMethod_A() {
-	Img_Template = dialog_modalny->getImage();
-	Img_Cipher = dialog_modalny->getMessage();
-
-	unsigned char* Template;
-	unsigned char* Cipher;
-	unsigned char* Coded;
-	Img_Coded = Img_Template;
-	Template = Img_Template.GetData();
-	Cipher = Img_Cipher.GetData();
-	Coded = Img_Coded.GetData();
-
-	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i = i + 3) {
-		if (Cipher[i] < 32) {
-			Coded[i] -= 1;
-			Coded[i + 1] -= 1;
-			Coded[i + 2] -= 1;
-		}
-		else if (Cipher[i] >= 32 && Cipher[i] < 64) {
-			Coded[i] -= 1;
-			Coded[i + 1] -= 1;
-		}
-		else if (Cipher[i] >= 64 && Cipher[i] < 96) {
-			Coded[i] -= 1;
-			Coded[i + 2] -= 1;
-		}
-		else if (Cipher[i] >= 96 && Cipher[i] < 128) {
-			Coded[i] -= 1;
-		}
-		else if (Cipher[i] >= 128 && Cipher[i] < 160) {
-			Coded[i + 1] -= 1;
-			Coded[i + 2] -= 1;
-		}
-		else if (Cipher[i] >= 160 && Cipher[i] < 192) {
-			Coded[i + 1] -= 1;
-		}
-		else if (Cipher[i] >= 192 && Cipher[i] < 224) {
-			Coded[i + 2] -= 1;
-		}
-	}
-	Img_Coded.SaveFile("Zakodowany_Obraz.png");
-}
-
-void GUIMyFrame1::DecodeMethod_A() {
-
-	unsigned char* Template;
-	unsigned char* Cipher;
-	unsigned char* Coded;
-	Cipher = Img_Cipher.GetData();
-	Img_Template = dialog_modalny->getImage();
-	Img_Coded = dialog_modalny->getMessage();
-	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i++) {
-		Cipher[i] = 255;
-	}
-	Template = Img_Template.GetData();
-
-	Coded = Img_Coded.GetData();
-	for (int i = 0; i < Img_Template.GetHeight() * Img_Template.GetWidth() * 3; i = i + 3) {
-		if (Template[i + 2] - Coded[i + 2] == 1 && Template[i + 1] - Coded[i + 1] == 1 && Template[i] - Coded[i] == 1) {
-			Cipher[i] = 0;
-			Cipher[i + 1] = 0;
-			Cipher[i + 2] = 0;
-		}
-		else if (Template[i + 2] - Coded[i + 2] == 1 && Template[i + 1] - Coded[i + 1] == 1 && Template[i] - Coded[i] == 1) {
-			Cipher[i] = 32;
-			Cipher[i + 1] = 32;
-			Cipher[i + 2] = 32;
-		}
-		else if (Template[i + 2] - Coded[i + 2] == 1 && Template[i] - Coded[i] == 1) {
-			Cipher[i] = 64;
-			Cipher[i + 1] = 64;
-			Cipher[i + 2] = 64;
-		}
-		else if (Template[i] - Coded[i] == 1) {
-			Cipher[i] = 96;
-			Cipher[i + 1] = 96;
-			Cipher[i + 2] = 96;
-		}
-		else if (Template[i + 1] - Coded[i + 1] == 1 && Template[i + 2] - Coded[i + 2] == 1) {
-			Cipher[i] = 128;
-			Cipher[i + 1] = 128;
-			Cipher[i + 2] = 128;
-		}
-		else if (Template[i + 1] - Coded[i + 1] == 1) {
-			Cipher[i] = 160;
-			Cipher[i + 1] = 160;
-			Cipher[i + 2] = 160;
-		}
-		else if (Template[i + 2] - Coded[i + 2] == 1) {
-			Cipher[i] = 192;
-			Cipher[i + 1] = 192;
-			Cipher[i + 2] = 192;
-		}
-	}
-	Img_Cipher.SaveFile("rozwiazanie.png");
-	Repaint();
-}
-
