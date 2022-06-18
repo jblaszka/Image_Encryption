@@ -22,14 +22,13 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 
 		Repaint(Img_Reference);
 
-		method_A.codeWithMethodA( Img_Reference, Img_Message);
-		method_B.codeWithMethodB(Img_Message);
+		method_A.save_MethodA_encrypted(Img_Reference, Img_Message);
+		method_B.save_methodB_encrypted(Img_Message);
+		method_B.codeWithMethodB(method_A.codeWithMethodA(Img_Reference, Img_Message));
 	}
 	else {
 		wxLogError(_("Error loading the image."));
 	}
-
-
 
 }
 
@@ -44,19 +43,18 @@ void GUIMyFrame1::m_button_decode_A_click( wxCommandEvent& event )
 	if (dialog_modalny2->checking == true) {
 		Img_Reference = dialog_modalny2->getImage();
 		Img_Message = dialog_modalny2->getMessage();
-
-		method_2.decode(Img_Reference, Img_Message);
+		Repaint(method_2.decodeMethodA(Img_Reference, Img_Message));
+		method_2.save_MethodA_decrypted(Img_Reference, Img_Message);
 	}
 	else {
 		wxLogError(_("Error loading the image."));
 	}
-
 }
 
 void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 {
 	dialog_modalny3 = new ModalDialogue(this);
-	dialog_modalny3->setFirstButtonText("Load code 1");
+	dialog_modalny3->setFirstButtonText("Load code 1!");
 	dialog_modalny3->setSecondButtonText("Load code 2");
 	dialog_modalny3->ShowModal();
 	MethodB method_B2;
@@ -64,7 +62,8 @@ void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 	if (dialog_modalny3->checking == true) {
 		Img_Reference = dialog_modalny3->getImage();
 		Img_Message = dialog_modalny3->getMessage();
-		method_B2.decode(Img_Reference, Img_Message);
+		Repaint(method_B2.decode(Img_Reference, Img_Message));
+		method_B2.save_methodB_decrypted(Img_Reference, Img_Message);
 	}
 	else {
 		wxLogError(_("Error loading the image."));
@@ -73,7 +72,23 @@ void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 
 void GUIMyFrame1::m_button_decode_A_and_B_click(wxCommandEvent& event)
 {
+	dialog_modalny4 = new ModalDialogue(this);
+	dialog_modalny4->setFirstButtonText("Load image");
+	dialog_modalny4->setSecondButtonText("Load code 1");
+	dialog_modalny4->add_new_button();
+	dialog_modalny4->ShowModal();
+	MethodB method_B2;
+	MethodA method_A2;
 
+	if (dialog_modalny4->checking == true) {
+		Img_Reference = dialog_modalny4->getImage();
+		Img_Message = dialog_modalny4->getMessage();
+		Img_Code = dialog_modalny4->getCode();
+		method_B2.save_methodB_decrypted(Img_Reference, Img_Message);
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
 }
 
 

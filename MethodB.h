@@ -7,10 +7,14 @@ class MethodB
 {
 public:
 	MethodB();
-	void codeWithMethodB(wxImage img1);
+	wxVector <wxImage> codeWithMethodB(wxImage img1);
+	wxImage decode(wxImage img1, wxImage img2);
+	void save_methodB_encrypted(wxImage img1);
+	void save_methodB_decrypted(wxImage img1, wxImage img2);
+
 	wxImage pattern;
 	wxImage messageToCode;
-	void decode(wxImage img1, wxImage img2);
+	wxVector <wxImage> vector_img;
 
 private:
 

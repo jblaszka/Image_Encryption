@@ -5,7 +5,7 @@ MethodA::MethodA()
 {
 }
 
-void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
+wxImage MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 {
 	wxImage Img_Reference = img1;
 	wxImage Img_MessageToCode = img2;
@@ -47,11 +47,15 @@ void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 			Coded[i + 2] -= 1;
 		}
 	}
-	Img_encrypted.SaveFile("methodA_encrypted.png");
 
+	return Img_encrypted;
 }
 
-void MethodA::decode(wxImage img1, wxImage img2) {
+void MethodA::save_MethodA_encrypted(wxImage img1, wxImage img2) {
+	this->codeWithMethodA(img1, img2).SaveFile("methodA_encrypted.png");
+}
+
+wxImage MethodA::decodeMethodA(wxImage img1, wxImage img2) {
 
 	wxImage Img_Reference = img1;
 	wxImage Img_Encrypted = img2;
@@ -107,7 +111,11 @@ void MethodA::decode(wxImage img1, wxImage img2) {
 			Cipher[i + 2] = 192;
 		}
 	}
-	Img_Message.SaveFile("methodA_decrypted.png"); 
+	return Img_Message;
+}
+
+void MethodA::save_MethodA_decrypted(wxImage img1, wxImage img2) {
+	this->decodeMethodA(img1, img2).SaveFile("methodA_decrypted.png");
 }
 
 

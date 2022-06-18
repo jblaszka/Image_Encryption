@@ -32,6 +32,11 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 
 	m_button_load_message->Bind(wxEVT_BUTTON, &ModalDialogue::m_button_load_message_click, this);
 
+	m_button_load_image_2 = new wxButton(this, wxID_ANY, wxT("Load code 2"), wxDefaultPosition, wxSize(100, -1), 0);
+	bSizer3->Add(m_button_load_image_2, 0, wxALIGN_CENTER_HORIZONTAL | wxTOP | wxLEFT, 5);
+
+	m_button_load_image_2->Bind(wxEVT_BUTTON, &ModalDialogue::m_button_load_image_2_click, this);
+	m_button_load_image_2->Hide();
 
 	bSizer2->Add(bSizer3, 0, wxEXPAND | wxRIGHT, 5);
 
@@ -89,7 +94,6 @@ void ModalDialogue::m_button_load_image_click(wxCommandEvent& event)
 
 void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 {
-
 	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("PNG files (*.png)|*.png"), wxFD_OPEN));
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
 	{
@@ -98,6 +102,22 @@ void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 		else
 		{
 			wxImage TempImg(Img_message);
+			setIndicatorMessage();
+		}
+		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
+	}
+}
+
+void ModalDialogue::m_button_load_image_2_click(wxCommandEvent& event)
+{
+	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("PNG files (*.png)|*.png"), wxFD_OPEN));
+	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
+	{
+		if (!Img_message.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_PNG))
+			wxLogError(_("Error loading the image."));
+		else
+		{
+			wxImage TempImg(Img_code);
 			setIndicatorMessage();
 		}
 		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
@@ -130,10 +150,20 @@ wxImage ModalDialogue::getMessage() {
 	return Img_message;
 }
 
+wxImage ModalDialogue::getCode() {
+	return Img_code;
+}
+
 void ModalDialogue::setFirstButtonText(wxString text) {
 	m_button_load_image->SetLabel(text);
 }
 
 void ModalDialogue::setSecondButtonText(wxString text) {
 	m_button_load_message->SetLabel(text);
+}
+
+void ModalDialogue::add_new_button()
+{
+	m_button_load_image_2->Show();
+	this->Layout();
 }

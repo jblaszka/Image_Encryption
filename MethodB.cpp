@@ -5,12 +5,12 @@ MethodB::MethodB()
 {
 }
 
-void MethodB::codeWithMethodB(wxImage img1)
+wxVector <wxImage> MethodB::codeWithMethodB(wxImage img1)
 {
 	srand(time(NULL));
-	wxImage Img_A(1600, 1066);
-	wxImage Img_B(1600, 1066);
-	wxImage Img_C(1600, 1066);
+	wxImage Img_A(2 * img1.GetWidth(), 2 * img1.GetHeight());
+	wxImage Img_B(2 * img1.GetWidth(), 2 * img1.GetHeight());
+	wxImage Img_C(2 * img1.GetWidth(), 2 * img1.GetHeight());
 
 	unsigned char* Coded;
 	unsigned char* Image_a;
@@ -75,19 +75,26 @@ void MethodB::codeWithMethodB(wxImage img1)
 			}
 		}
 	}
+	vector_img.push_back(Img_A);
+	vector_img.push_back(Img_B);
 
-	Img_A.SaveFile("methodB_encrypted_1.png");
-	Img_B.SaveFile("methodB_encrypted_2.png");
+	return vector_img;
 }
 
-void MethodB::decode(wxImage img1, wxImage img2) {
+void MethodB::save_methodB_encrypted(wxImage img1) {
+	this->codeWithMethodB(img1)[0].SaveFile("methodB_encrypted_1.png");
+	this->codeWithMethodB(img1)[1].SaveFile("methodB_encrypted_2.png");
+
+}
+
+wxImage MethodB::decode(wxImage img1, wxImage img2) {
 
 	srand(time(NULL));
 
 	wxImage Img_A = img1;
 	wxImage Img_B = img2;
 
-	wxImage Img_C(1600, 1066);
+	wxImage Img_C(img1.GetWidth(), img1.GetHeight());
 
 	unsigned char* Coded;
 	unsigned char* Image_a;
@@ -111,7 +118,11 @@ void MethodB::decode(wxImage img1, wxImage img2) {
 			Image_c[j + 2] = 0;
 		}
 	}
-	Img_C.Rescale(800, 533);
-	Img_C.SaveFile("methodB_decrypted.png");
-	
+	Img_C.Rescale(img1.GetWidth() / 2, img1.GetHeight() / 2);
+	return Img_C;
+}
+
+
+void MethodB::save_methodB_decrypted(wxImage img1, wxImage img2) {
+	this->decode(img1, img2).SaveFile("methodB_decrypted.png");
 }

@@ -7,8 +7,12 @@ class MethodA
 {
 public :
 	MethodA();
-	void codeWithMethodA(wxImage img1, wxImage img2);
-	void decode(wxImage img1, wxImage img2);
+	wxImage codeWithMethodA(wxImage img1, wxImage img2);
+	wxImage decodeMethodA(wxImage img1, wxImage img2);
+
+	void save_MethodA_encrypted(wxImage img1, wxImage img2);
+	void save_MethodA_decrypted(wxImage img1, wxImage img2);
+
 
 private:
 	wxImage pattern;

@@ -6,20 +6,24 @@ class ModalDialogue : public wxDialog
 {
 private:
     wxButton* m_button_load_image;
+    wxButton* m_button_load_image_2;
     wxButton* m_button_load_message;
     wxPanel* m_panel_image;
     wxPanel* m_panel_message;
     wxButton* m_button_save;
 
+
 public:
     ModalDialogue(wxWindow* parent, wxWindowID id = 1, const wxString& title = _("Modalny"),
-        const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(250, 130),
+        const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(250, 150),
         long style = wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX);
 
 
     void m_button_load_image_click(wxCommandEvent& event);
+    void m_button_load_image_2_click(wxCommandEvent& event);
     void m_button_load_message_click(wxCommandEvent& event);
     void m_button_save_click(wxCommandEvent& event);
+    void add_new_button();
     void OnClose(wxCloseEvent& event) { Destroy(); }
     void setIndicatorMessage();
     void setIndicatorImage();
@@ -28,8 +32,9 @@ public:
 
     wxImage getImage();
     wxImage getMessage();
+    wxImage getCode();
 
-    wxImage Img_message, Img_Org;
+    wxImage Img_message, Img_Org, Img_code;
     wxBitmap MyBitmap;
     bool checking = false;
 
