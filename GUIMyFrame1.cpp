@@ -71,6 +71,11 @@ void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 	}
 }
 
+void GUIMyFrame1::m_button_decode_A_and_B_click(wxCommandEvent& event)
+{
+
+}
+
 
 void GUIMyFrame1::Repaint(wxImage image)
 {

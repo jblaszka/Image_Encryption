@@ -10,6 +10,7 @@ class GUIMyFrame1 : public MyFrame1
 		void m_button_code_click( wxCommandEvent& event );
 		void m_button_decode_A_click( wxCommandEvent& event );
 		void m_button_decode_B_click(wxCommandEvent& event);
+		void m_button_decode_A_and_B_click(wxCommandEvent& event);
 
 	public:
 		ModalDialogue* dialog_modalny;

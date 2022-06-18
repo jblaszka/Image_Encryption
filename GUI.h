@@ -38,6 +38,7 @@ protected:
 	wxButton* m_button_code;
 	wxButton* m_button_decode_A;
 	wxButton* m_button_decode_B;
+	wxButton* m_button_decode_A_and_B;
 
 
 
@@ -46,6 +47,7 @@ protected:
 	virtual void m_button_code_click(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_button_decode_A_click(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_button_decode_B_click(wxCommandEvent& event) { event.Skip(); }
+	virtual void m_button_decode_A_and_B_click(wxCommandEvent& event) { event.Skip(); }
 	
 
 public:

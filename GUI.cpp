@@ -23,6 +23,9 @@ MyFrame1::MyFrame1(wxWindow* parent, wxWindowID id, const wxString& title, const
 	m_button_decode_B = new wxButton(this, wxID_ANY, wxT("Decode B"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizer2->Add(m_button_decode_B, 0, wxEXPAND | wxTOP | wxLEFT, 5);
 
+	m_button_decode_A_and_B = new wxButton(this, wxID_ANY, wxT("Decode A + B"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer2->Add(m_button_decode_A_and_B, 0, wxEXPAND | wxTOP | wxLEFT, 5);
+
 	bSizer1->Add(bSizer2, 0, wxEXPAND | wxRIGHT, 5);
 
 	wxBoxSizer* bSizer3;
@@ -47,6 +50,7 @@ MyFrame1::MyFrame1(wxWindow* parent, wxWindowID id, const wxString& title, const
 	m_button_code->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_code_click), NULL, this);
 	m_button_decode_A->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_A_click), NULL, this);
 	m_button_decode_B->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_B_click), NULL, this);
+	m_button_decode_A_and_B->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_A_and_B_click), NULL, this);
 }
 
 MyFrame1::~MyFrame1()
@@ -55,4 +59,5 @@ MyFrame1::~MyFrame1()
 	m_button_code->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_code_click), NULL, this);
 	m_button_decode_A->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_A_click), NULL, this);
 	m_button_decode_B->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_B_click), NULL, this);
+	m_button_decode_A_and_B->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame1::m_button_decode_A_and_B_click), NULL, this);
 }
