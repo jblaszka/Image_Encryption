@@ -47,7 +47,7 @@ void MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 			Coded[i + 2] -= 1;
 		}
 	}
-	Img_encrypted.SaveFile("TESTOWO.png");
+	Img_encrypted.SaveFile("methodA_encrypted.png");
 
 }
 
@@ -107,7 +107,7 @@ void MethodA::decode(wxImage img1, wxImage img2) {
 			Cipher[i + 2] = 192;
 		}
 	}
-	Img_Message.SaveFile("TESTOWO2.png");
+	Img_Message.SaveFile("methodA_decrypted.png"); 
 }
 
 

@@ -14,7 +14,7 @@ MyFrame1::MyFrame1(wxWindow* parent, wxWindowID id, const wxString& title, const
 	bSizer2 = new wxBoxSizer(wxVERTICAL);
 
 	bSizer2->SetMinSize(wxSize(200, 533));
-	m_button_code = new wxButton(this, wxID_ANY, wxT("Code!"), wxDefaultPosition, wxDefaultSize, 0);
+	m_button_code = new wxButton(this, wxID_ANY, wxT("Code!!"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizer2->Add(m_button_code, 0, wxEXPAND | wxTOP | wxLEFT, 5);
 
 	m_button_decode_A = new wxButton(this, wxID_ANY, wxT("Decode A"), wxDefaultPosition, wxDefaultSize, 0);

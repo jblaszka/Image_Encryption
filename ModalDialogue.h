@@ -23,6 +23,8 @@ public:
     void OnClose(wxCloseEvent& event) { Destroy(); }
     void setIndicatorMessage();
     void setIndicatorImage();
+    void setFirstButtonText(wxString text);
+    void setSecondButtonText(wxString text);
 
     wxImage getImage();
     wxImage getMessage();

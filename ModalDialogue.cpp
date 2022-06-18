@@ -77,7 +77,7 @@ void ModalDialogue::m_button_load_image_click(wxCommandEvent& event)
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
 	{
 		if (!Img_Org.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_PNG))
-			wxLogError(_("Nie mo¿na za³adowaæ obrazka"));
+			wxLogError(_("Error loading the image."));
 		else
 		{
 			wxImage TempImg(Img_Org); 
@@ -94,7 +94,7 @@ void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
 	{
 		if (!Img_message.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_PNG))
-			wxLogError(_("Nie mo¿na za³adowaæ obrazka"));
+			wxLogError(_("Error loading the image."));
 		else
 		{
 			wxImage TempImg(Img_message);
@@ -128,4 +128,12 @@ wxImage ModalDialogue::getImage() {
 
 wxImage ModalDialogue::getMessage() {
 	return Img_message;
+}
+
+void ModalDialogue::setFirstButtonText(wxString text) {
+	m_button_load_image->SetLabel(text);
+}
+
+void ModalDialogue::setSecondButtonText(wxString text) {
+	m_button_load_message->SetLabel(text);
 }

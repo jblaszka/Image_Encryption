@@ -5,7 +5,7 @@ MethodB::MethodB()
 {
 }
 
-wxVector <wxImage> MethodB::codeWithMethodB(wxImage img1)
+void MethodB::codeWithMethodB(wxImage img1)
 {
 	srand(time(NULL));
 	wxImage Img_A(1600, 1066);
@@ -75,13 +75,12 @@ wxVector <wxImage> MethodB::codeWithMethodB(wxImage img1)
 			}
 		}
 	}
-	vector_img.push_back(Img_A);
-	vector_img.push_back(Img_B);
-	return vector_img;
 
+	Img_A.SaveFile("methodB_encrypted_1.png");
+	Img_B.SaveFile("methodB_encrypted_2.png");
 }
 
-wxImage MethodB::decode(wxImage img1, wxImage img2) {
+void MethodB::decode(wxImage img1, wxImage img2) {
 
 	srand(time(NULL));
 
@@ -113,6 +112,6 @@ wxImage MethodB::decode(wxImage img1, wxImage img2) {
 		}
 	}
 	Img_C.Rescale(800, 533);
-	return Img_C;
-
+	Img_C.SaveFile("methodB_decrypted.png");
+	
 }

@@ -23,11 +23,10 @@ void GUIMyFrame1::m_button_code_click(wxCommandEvent& event)
 		Repaint(Img_Reference);
 
 		method_A.codeWithMethodA( Img_Reference, Img_Message);
-		method_B.codeWithMethodB(Img_Message)[0].SaveFile("BBB.png");
-		method_B.codeWithMethodB(Img_Message)[1].SaveFile("BBB2.png");
+		method_B.codeWithMethodB(Img_Message);
 	}
 	else {
-		wxLogError(_("B³¹d podczas ³adowania obrazów."));
+		wxLogError(_("Error loading the image."));
 	}
 
 
@@ -42,23 +41,34 @@ void GUIMyFrame1::m_button_decode_A_click( wxCommandEvent& event )
 	MethodA method_2;
 	MethodB method_B2;
 
-	Img_Reference = dialog_modalny2->getImage();
-	Img_Message = dialog_modalny2->getMessage();
+	if (dialog_modalny2->checking == true) {
+		Img_Reference = dialog_modalny2->getImage();
+		Img_Message = dialog_modalny2->getMessage();
 
-	method_2.decode(Img_Reference, Img_Message);
+		method_2.decode(Img_Reference, Img_Message);
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
+
 }
 
 void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 {
 	dialog_modalny3 = new ModalDialogue(this);
+	dialog_modalny3->setFirstButtonText("Load code 1");
+	dialog_modalny3->setSecondButtonText("Load code 2");
 	dialog_modalny3->ShowModal();
-
 	MethodB method_B2;
 
-	Img_Reference = dialog_modalny3->getImage();
-	Img_Message = dialog_modalny3->getMessage();
-
-	method_B2.decode(Img_Reference, Img_Message).SaveFile("BWynik.png");
+	if (dialog_modalny3->checking == true) {
+		Img_Reference = dialog_modalny3->getImage();
+		Img_Message = dialog_modalny3->getMessage();
+		method_B2.decode(Img_Reference, Img_Message);
+	}
+	else {
+		wxLogError(_("Error loading the image."));
+	}
 }
 
 

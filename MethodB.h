@@ -7,11 +7,11 @@ class MethodB
 {
 public:
 	MethodB();
-	wxVector <wxImage> codeWithMethodB(wxImage img1);
+	void codeWithMethodB(wxImage img1);
 	wxImage pattern;
 	wxImage messageToCode;
-	wxImage decode(wxImage img1, wxImage img2);
-	wxVector <wxImage> vector_img;
+	void decode(wxImage img1, wxImage img2);
+
 private:
 
 
