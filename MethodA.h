@@ -3,9 +3,9 @@
 #define __MethodA__
 #include "GUIMyFrame1.h"
 
-class MethodA 
+class MethodA
 {
-public :
+public:
 	MethodA();
 	wxImage codeWithMethodA(wxImage img1, wxImage img2);
 	wxImage decodeMethodA(wxImage img1, wxImage img2);

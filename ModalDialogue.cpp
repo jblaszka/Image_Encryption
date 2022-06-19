@@ -1,4 +1,4 @@
-#include "ModalDialogue.h"
+﻿#include "ModalDialogue.h"
 #include "GUI.h"
 #include <wx/wxprec.h>
 
@@ -85,7 +85,7 @@ void ModalDialogue::m_button_load_image_click(wxCommandEvent& event)
 			wxLogError(_("Error loading the image."));
 		else
 		{
-			wxImage TempImg(Img_Org); 
+			wxImage TempImg(Img_Org);
 			setIndicatorImage();
 		}
 		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
@@ -113,7 +113,7 @@ void ModalDialogue::m_button_load_image_2_click(wxCommandEvent& event)
 	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("PNG files (*.png)|*.png"), wxFD_OPEN));
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
 	{
-		if (!Img_message.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_PNG))
+		if (!Img_code.LoadFile(WxOpenFileDialog1->GetPath(), wxBITMAP_TYPE_PNG))
 			wxLogError(_("Error loading the image."));
 		else
 		{

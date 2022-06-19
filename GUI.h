@@ -48,7 +48,7 @@ protected:
 	virtual void m_button_decode_A_click(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_button_decode_B_click(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_button_decode_A_and_B_click(wxCommandEvent& event) { event.Skip(); }
-	
+
 
 public:
 
@@ -59,4 +59,3 @@ public:
 	wxScrolledWindow* m_scrolledWindow;
 
 };
-

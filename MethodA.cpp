@@ -7,9 +7,9 @@ MethodA::MethodA()
 
 wxImage MethodA::codeWithMethodA(wxImage img1, wxImage img2)
 {
-	wxImage Img_Reference = img1;
-	wxImage Img_MessageToCode = img2;
-	wxImage Img_encrypted = Img_Reference;
+	wxImage Img_Reference = img1.Copy();
+	wxImage Img_MessageToCode = img2.Copy();
+	wxImage Img_encrypted = Img_Reference.Copy();
 
 	unsigned char* Template;
 	unsigned char* Cipher;
@@ -57,8 +57,8 @@ void MethodA::save_MethodA_encrypted(wxImage img1, wxImage img2) {
 
 wxImage MethodA::decodeMethodA(wxImage img1, wxImage img2) {
 
-	wxImage Img_Reference = img1;
-	wxImage Img_Encrypted = img2;
+	wxImage Img_Reference = img1.Copy();
+	wxImage Img_Encrypted = img2.Copy();
 
 	wxImage Img_Message(Img_Reference.GetWidth(), Img_Reference.GetHeight());
 
@@ -117,5 +117,3 @@ wxImage MethodA::decodeMethodA(wxImage img1, wxImage img2) {
 void MethodA::save_MethodA_decrypted(wxImage img1, wxImage img2) {
 	this->decodeMethodA(img1, img2).SaveFile("methodA_decrypted.png");
 }
-
-
