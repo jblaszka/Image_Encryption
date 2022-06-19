@@ -32,11 +32,11 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 
 	m_button_load_message->Bind(wxEVT_BUTTON, &ModalDialogue::m_button_load_message_click, this);
 
-	m_button_load_image_2 = new wxButton(this, wxID_ANY, wxT("Load code 2"), wxDefaultPosition, wxSize(100, -1), 0);
-	bSizer3->Add(m_button_load_image_2, 0, wxALIGN_CENTER_HORIZONTAL | wxTOP | wxLEFT, 5);
+	m_button_load_code = new wxButton(this, wxID_ANY, wxT("Load code 2"), wxDefaultPosition, wxSize(100, -1), 0);
+	bSizer3->Add(m_button_load_code, 0, wxALIGN_CENTER_HORIZONTAL | wxTOP | wxLEFT, 5);
 
-	m_button_load_image_2->Bind(wxEVT_BUTTON, &ModalDialogue::m_button_load_image_2_click, this);
-	m_button_load_image_2->Hide();
+	m_button_load_code->Bind(wxEVT_BUTTON, &ModalDialogue::m_button_load_code_click, this);
+	m_button_load_code->Hide();
 
 	bSizer2->Add(bSizer3, 0, wxEXPAND | wxRIGHT, 5);
 
@@ -50,8 +50,14 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 	m_panel_message = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(20, 20), wxTAB_TRAVERSAL);
 
 	bSizer4->Add(m_panel_message, 0, wxALL, 5);
+
+	m_panel_code = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(20, 20), wxTAB_TRAVERSAL);
+
+	bSizer4->Add(m_panel_code, 0, wxALL, 5);
+
 	m_panel_message->SetBackgroundColour(wxColor(200, 0, 0));
 	m_panel_image->SetBackgroundColour(wxColor(200, 0, 0));
+	m_panel_code->SetBackgroundColour(wxColor(200, 0, 0));
 
 	bSizer2->Add(bSizer4, 1, wxEXPAND | wxLEFT, 5);
 
@@ -108,7 +114,7 @@ void ModalDialogue::m_button_load_message_click(wxCommandEvent& event)
 	}
 }
 
-void ModalDialogue::m_button_load_image_2_click(wxCommandEvent& event)
+void ModalDialogue::m_button_load_code_click(wxCommandEvent& event)
 {
 	std::shared_ptr<wxFileDialog> WxOpenFileDialog1(new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("PNG files (*.png)|*.png"), wxFD_OPEN));
 	if (WxOpenFileDialog1->ShowModal() == wxID_OK)
@@ -118,7 +124,7 @@ void ModalDialogue::m_button_load_image_2_click(wxCommandEvent& event)
 		else
 		{
 			wxImage TempImg(Img_code);
-			setIndicatorMessage();
+			setIndicatorCode();
 		}
 		if (MyBitmap.Ok()) this->SetTitle(WxOpenFileDialog1->GetPath());
 	}
@@ -138,6 +144,12 @@ void ModalDialogue::setIndicatorImage() {
 
 void ModalDialogue::setIndicatorMessage() {
 	wxClientDC dc(m_panel_message);
+	dc.SetBrush(wxColor(43, 243, 77));
+	dc.DrawRectangle(0, 0, 20, 20);
+}
+
+void ModalDialogue::setIndicatorCode() {
+	wxClientDC dc(m_panel_code);
 	dc.SetBrush(wxColor(43, 243, 77));
 	dc.DrawRectangle(0, 0, 20, 20);
 }
@@ -164,6 +176,6 @@ void ModalDialogue::setSecondButtonText(wxString text) {
 
 void ModalDialogue::add_new_button()
 {
-	m_button_load_image_2->Show();
+	m_button_load_code->Show();
 	this->Layout();
 }
