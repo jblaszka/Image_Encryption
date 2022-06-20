@@ -82,6 +82,7 @@ void GUIMyFrame1::m_button_decode_A_and_B_click(wxCommandEvent& event)
 	dialog_modalny4->setFirstButtonText("Load image");
 	dialog_modalny4->setSecondButtonText("Load code 1");
 	dialog_modalny4->add_new_button();
+	dialog_modalny4->add_new_indicator();
 	dialog_modalny4->ShowModal();
 	MethodB method_B2;
 	MethodA method_A2;

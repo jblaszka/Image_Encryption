@@ -25,6 +25,7 @@ public:
     void m_button_load_message_click(wxCommandEvent& event);
     void m_button_save_click(wxCommandEvent& event);
     void add_new_button();
+    void add_new_indicator();
     void OnClose(wxCloseEvent& event) { Destroy(); }
     void setIndicatorMessage();
     void setIndicatorImage();

@@ -58,6 +58,7 @@ ModalDialogue::ModalDialogue(wxWindow* parent, wxWindowID id, const wxString& ti
 	m_panel_message->SetBackgroundColour(wxColor(200, 0, 0));
 	m_panel_image->SetBackgroundColour(wxColor(200, 0, 0));
 	m_panel_code->SetBackgroundColour(wxColor(200, 0, 0));
+	m_panel_code->Hide();
 
 	bSizer2->Add(bSizer4, 1, wxEXPAND | wxLEFT, 5);
 
@@ -177,5 +178,11 @@ void ModalDialogue::setSecondButtonText(wxString text) {
 void ModalDialogue::add_new_button()
 {
 	m_button_load_code->Show();
+	this->Layout();
+}
+
+void ModalDialogue::add_new_indicator()
+{
+	m_panel_code->Show();
 	this->Layout();
 }
