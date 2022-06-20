@@ -87,7 +87,7 @@ void MethodB::save_methodB_encrypted(wxImage img1) {
 
 }
 
-wxImage MethodB::decode(wxImage img1, wxImage img2) {
+wxImage MethodB::decodeMethodB(wxImage img1, wxImage img2) {
 
 	srand(time(NULL));
 
@@ -124,5 +124,5 @@ wxImage MethodB::decode(wxImage img1, wxImage img2) {
 
 
 void MethodB::save_methodB_decrypted(wxImage img1, wxImage img2) {
-	this->decode(img1, img2).SaveFile("methodB_decrypted.png");
+	this->decodeMethodB(img1, img2).SaveFile("methodB_decrypted.png");
 }

@@ -8,7 +8,7 @@ class MethodB
 public:
 	MethodB();
 	wxVector <wxImage> codeWithMethodB(wxImage img1);
-	wxImage decode(wxImage img1, wxImage img2);
+	wxImage decodeMethodB(wxImage img1, wxImage img2);
 	void save_methodB_encrypted(wxImage img1);
 	void save_methodB_decrypted(wxImage img1, wxImage img2);
 

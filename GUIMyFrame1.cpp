@@ -60,7 +60,7 @@ void GUIMyFrame1::m_button_decode_A_click(wxCommandEvent& event)
 void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 {
 	dialog_modalny3 = new ModalDialogue(this);
-	dialog_modalny3->setFirstButtonText("Load code 1!");
+	dialog_modalny3->setFirstButtonText("Load code 1");
 	dialog_modalny3->setSecondButtonText("Load code 2");
 	dialog_modalny3->ShowModal();
 	MethodB method_B2;
@@ -68,7 +68,7 @@ void GUIMyFrame1::m_button_decode_B_click(wxCommandEvent& event)
 	if (dialog_modalny3->checking == true) {
 		Img_Reference = dialog_modalny3->getImage();
 		Img_Message = dialog_modalny3->getMessage();
-		Repaint(method_B2.decode(Img_Reference, Img_Message));
+		Repaint(method_B2.decodeMethodB(Img_Reference, Img_Message));
 		method_B2.save_methodB_decrypted(Img_Reference, Img_Message);
 	}
 	else {
@@ -90,9 +90,9 @@ void GUIMyFrame1::m_button_decode_A_and_B_click(wxCommandEvent& event)
 		Img_Reference = dialog_modalny4->getImage();
 		Img_Message = dialog_modalny4->getMessage();
 		Img_Code = dialog_modalny4->getCode();
-		method_B2.decode(method_A2.decodeMethodA(Img_Message, Img_Reference),
+		method_B2.decodeMethodB(method_A2.decodeMethodA(Img_Message, Img_Reference),
 					method_A2.decodeMethodA(Img_Message, Img_Code)).SaveFile("A_and_B_decoded.png");
-		Repaint(method_B2.decode(method_A2.decodeMethodA(Img_Message, Img_Reference),
+		Repaint(method_B2.decodeMethodB(method_A2.decodeMethodA(Img_Message, Img_Reference),
 			method_A2.decodeMethodA(Img_Message, Img_Code)));
 	}
 	else {
