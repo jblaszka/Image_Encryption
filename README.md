@@ -5,4 +5,6 @@
 
 The application allows you to encrypt information in images using their modified data, as well as decrypt information from encrypted images. Pictures can be encoded using both steganographic and cryptographic methods.
 
+<p align="center">
 ![](img/demo.gif)
+</p>
